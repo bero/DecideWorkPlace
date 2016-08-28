@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{ea5e6f9a-8dff-412e-80ca-85964cd603ea}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="C:\Attracs\Attracs-Online\client\Attracs.dproj" />
+    <Projects Include="DecideWorkingPlace.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="DecideWorkingPlace">
+    <MSBuild Projects="DecideWorkingPlace.dproj" Targets="" />
+  </Target>
+  <Target Name="DecideWorkingPlace:Clean">
+    <MSBuild Projects="DecideWorkingPlace.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DecideWorkingPlace:Make">
+    <MSBuild Projects="DecideWorkingPlace.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Attracs">
+    <MSBuild Projects="C:\Attracs\Attracs-Online\client\Attracs.dproj" Targets="" />
+  </Target>
+  <Target Name="Attracs:Clean">
+    <MSBuild Projects="C:\Attracs\Attracs-Online\client\Attracs.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Attracs:Make">
+    <MSBuild Projects="C:\Attracs\Attracs-Online\client\Attracs.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="DecideWorkingPlace;Attracs" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="DecideWorkingPlace:Clean;Attracs:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="DecideWorkingPlace:Make;Attracs:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>
