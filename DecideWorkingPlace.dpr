@@ -2,7 +2,7 @@ program DecideWorkingPlace;
 
 uses
   Forms,
-  Main in 'Main.pas' {Form2},
+  Main in 'Main.pas' {WorkPlaceForm},
   NETWORKLIST_TLB in 'NETWORKLIST_TLB.pas',
   ListTypes in 'ListTypes.pas';
 
@@ -12,6 +12,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'DecideWorkingPlace';
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TWorkPlaceForm, WorkPlaceForm);
   Application.Run;
 end.
