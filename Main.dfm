@@ -2,8 +2,8 @@ object WorkPlaceForm: TWorkPlaceForm
   Left = 0
   Top = 0
   Caption = 'Decide workplace for Attracs'
-  ClientHeight = 137
-  ClientWidth = 208
+  ClientHeight = 155
+  ClientWidth = 220
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -52,6 +52,15 @@ object WorkPlaceForm: TWorkPlaceForm
     Height = 17
     Caption = 'Jorvas Office'
     TabOrder = 4
+  end
+  object btnRefresh: TButton
+    Left = 16
+    Top = 117
+    Width = 75
+    Height = 25
+    Caption = 'Refresh'
+    TabOrder = 5
+    OnClick = btnRefreshClick
   end
   object TrayIcon: TTrayIcon
     Animate = True

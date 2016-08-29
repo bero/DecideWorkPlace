@@ -9,15 +9,18 @@ uses
 type
   TWorkPlaceForm = class(TForm)
     ApplicationEvents: TApplicationEvents;
+    btnRefresh: TButton;
     rdAttracsOffice: TRadioButton;
     rdIndolaOffice: TRadioButton;
     rdJorvasOffice: TRadioButton;
     rdOutOfOffice: TRadioButton;
     rdUnkown: TRadioButton;
     TrayIcon: TTrayIcon;
-    procedure DecideConnection(Sender: TObject);
     procedure ApplicationEventsMinimize(Sender: TObject);
     procedure TrayIconClick(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+  private
+    procedure DecideConnection;
   public
     procedure AfterConstruction; override;
   end;
@@ -39,18 +42,7 @@ uses
 procedure TWorkPlaceForm.AfterConstruction;
 begin
   inherited;
-  case GetTypes of
-    INDOLAOFFICE:
-      rdIndolaOffice.Checked := True;
-    JORVASOFFICE:
-      rdAttracsOffice.Checked := True;
-    ATTRACSOFFICE:
-      rdAttracsOffice.Checked := True;
-    OUTOFOFFICE:
-      rdOutOfOffice.Checked := True;
-    UNKNOWN:
-      rdUnkown.Checked := True;
-  end;
+  DecideConnection;
 end;
 
 procedure TWorkPlaceForm.ApplicationEventsMinimize(Sender: TObject);
@@ -61,11 +53,20 @@ begin
   TrayIcon.ShowBalloonHint;
 end;
 
-procedure TWorkPlaceForm.DecideConnection(Sender: TObject);
+procedure TWorkPlaceForm.btnRefreshClick(Sender: TObject);
+begin
+  DecideConnection;
+end;
+
+procedure TWorkPlaceForm.DecideConnection;
 begin
   case GetTypes of
     INDOLAOFFICE:
       rdIndolaOffice.Checked := True;
+    JORVASOFFICE:
+      rdAttracsOffice.Checked := True;
+    ATTRACSOFFICE:
+      rdAttracsOffice.Checked := True;
     OUTOFOFFICE:
       rdOutOfOffice.Checked := True;
     UNKNOWN:
