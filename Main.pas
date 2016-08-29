@@ -11,6 +11,7 @@ type
     ApplicationEvents: TApplicationEvents;
     rdAttracsOffice: TRadioButton;
     rdIndolaOffice: TRadioButton;
+    rdJorvasOffice: TRadioButton;
     rdOutOfOffice: TRadioButton;
     rdUnkown: TRadioButton;
     TrayIcon: TTrayIcon;
@@ -35,13 +36,14 @@ uses
 
 {$R *.dfm}
 
-
 procedure TWorkPlaceForm.AfterConstruction;
 begin
   inherited;
   case GetTypes of
     INDOLAOFFICE:
       rdIndolaOffice.Checked := True;
+    JORVASOFFICE:
+      rdAttracsOffice.Checked := True;
     ATTRACSOFFICE:
       rdAttracsOffice.Checked := True;
     OUTOFOFFICE:

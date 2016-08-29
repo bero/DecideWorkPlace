@@ -23,7 +23,7 @@ object WorkPlaceForm: TWorkPlaceForm
   end
   object rdOutOfOffice: TRadioButton
     Left = 16
-    Top = 57
+    Top = 74
     Width = 113
     Height = 17
     Caption = 'Out of office'
@@ -31,7 +31,7 @@ object WorkPlaceForm: TWorkPlaceForm
   end
   object rdUnkown: TRadioButton
     Left = 16
-    Top = 78
+    Top = 94
     Width = 113
     Height = 17
     Caption = 'Unknown'
@@ -39,11 +39,19 @@ object WorkPlaceForm: TWorkPlaceForm
   end
   object rdAttracsOffice: TRadioButton
     Left = 16
-    Top = 36
+    Top = 55
     Width = 113
     Height = 17
     Caption = 'Attracs office'
     TabOrder = 3
+  end
+  object rdJorvasOffice: TRadioButton
+    Left = 16
+    Top = 35
+    Width = 113
+    Height = 17
+    Caption = 'Jorvas Office'
+    TabOrder = 4
   end
   object TrayIcon: TTrayIcon
     Animate = True
