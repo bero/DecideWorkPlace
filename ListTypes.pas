@@ -12,6 +12,7 @@ type
 
 function GetTypes: TConnectType;
 function GetFirstNetWorkName: TConnectType;
+function FindNetworkFromIni(const aSectionName, aRealNetWork: String): Boolean;
 function IsOnDomain(DomainType: NLM_DOMAIN_TYPE): Boolean;
 
 implementation
@@ -22,6 +23,14 @@ uses
   Dialogs,
   Windows, IniFiles;
 
+const
+  cnDistanceWork = 'DistanceWork';
+  cnIndolaOffice = 'IndolaOffice';
+  cnJorvasOffice = 'JorvasOffice';
+  cnAttracsOffice = 'AttracsOffice';
+  cnDomain = 'DomainNetWork';
+  cnNetworkName = 'NetworkName';
+  cnDummy = 'Dummy';
 var
   Inifile: TMemIniFile;
 
@@ -41,13 +50,6 @@ begin
 end;
 
 function GetFirstNetWorkName: TConnectType;
-const
-  cnDistanceWork = 'DistanceWork';
-  cnIndolaOffice = 'IndolaOffice';
-  cnAttracsOffice = 'AttracsOffice';
-  cnDomain = 'DomainNetWork';
-  cnNetworkName = 'NetworkName';
-  cnDummy = 'Dummy';
 var
   NetworkListManager: INetworkListManager;
   EnumNetworkConnections: IEnumNetworkConnections;
@@ -66,17 +68,40 @@ begin
     vIsOnDomain := IsOnDomain(NetworkConnection.GetDomainType);
 
     if (Inifile.ReadBool(cnIndolaOffice, cnDomain, False) = vIsOnDomain) and
-            (Inifile.ReadString(cnIndolaOffice, cnNetworkName, cnDummy) = vNetworkName) then
+             FindNetworkFromIni(cnIndolaOffice, vNetworkName) then
       Result := INDOLAOFFICE
-    else if (Inifile.ReadBool(cnIndolaOffice, cnDomain, False) = vIsOnDomain) and
-            (Inifile.ReadString(cnIndolaOffice, cnNetworkName, cnDummy) = vNetworkName) then
+    else if (Inifile.ReadBool(cnJorvasOffice, cnDomain, False) = vIsOnDomain) and
+             FindNetworkFromIni(cnJorvasOffice, vNetworkName) then
       Result := JORVASOFFICE
     else if (Inifile.ReadBool(cnAttracsOffice, cnDomain, False) = vIsOnDomain) and
-            (Inifile.ReadString(cnAttracsOffice, cnNetworkName, cnDummy) = vNetworkName) then
+             FindNetworkFromIni(cnAttracsOffice, vNetworkName) then
       Result := ATTRACSOFFICE
     else if (Inifile.ReadBool(cnDistanceWork, cnDomain, False) = vIsOnDomain) and
-       (Inifile.ReadString(cnDistanceWork, cnNetworkName, cnDummy) = vNetworkName)then
+             FindNetworkFromIni(cnDistanceWork, vNetworkName) then
       Result := OUTOFOFFICE;
+  end;
+end;
+
+function FindNetworkFromIni(const aSectionName, aRealNetWork: String): Boolean;
+var
+  vSettingValue: String;
+  vList: TStringList;
+  i: Integer;
+begin
+  Result := False;
+  vSettingValue := Inifile.ReadString(aSectionName, cnNetworkName, cnDummy);
+  vList := TStringList.Create;
+  vlist.StrictDelimiter := True;
+  try
+    vList.CommaText := vSettingValue;
+    for i := 0 to vList.Count - 1 do
+      if vList[i] = aRealNetWork then
+      begin
+        Result := True;
+        break;
+      end;
+  finally
+    FreeAndNil(vList);
   end;
 end;
 

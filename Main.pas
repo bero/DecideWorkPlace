@@ -8,11 +8,12 @@ uses
 
 type
   TWorkPlaceForm = class(TForm)
+    ApplicationEvents: TApplicationEvents;
+    rdAttracsOffice: TRadioButton;
     rdIndolaOffice: TRadioButton;
     rdOutOfOffice: TRadioButton;
     rdUnkown: TRadioButton;
     TrayIcon: TTrayIcon;
-    ApplicationEvents: TApplicationEvents;
     procedure DecideConnection(Sender: TObject);
     procedure ApplicationEventsMinimize(Sender: TObject);
     procedure TrayIconClick(Sender: TObject);
@@ -29,6 +30,7 @@ uses
   ActiveX,
   ComObj,
   IsConnected,
+  Registry,
   ListTypes;
 
 {$R *.dfm}
@@ -40,6 +42,8 @@ begin
   case GetTypes of
     INDOLAOFFICE:
       rdIndolaOffice.Checked := True;
+    ATTRACSOFFICE:
+      rdAttracsOffice.Checked := True;
     OUTOFOFFICE:
       rdOutOfOffice.Checked := True;
     UNKNOWN:

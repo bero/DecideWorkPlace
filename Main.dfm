@@ -2,7 +2,7 @@ object WorkPlaceForm: TWorkPlaceForm
   Left = 0
   Top = 0
   Caption = 'Decide workplace for Attracs'
-  ClientHeight = 133
+  ClientHeight = 137
   ClientWidth = 208
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object WorkPlaceForm: TWorkPlaceForm
   end
   object rdOutOfOffice: TRadioButton
     Left = 16
-    Top = 39
+    Top = 57
     Width = 113
     Height = 17
     Caption = 'Out of office'
@@ -31,11 +31,19 @@ object WorkPlaceForm: TWorkPlaceForm
   end
   object rdUnkown: TRadioButton
     Left = 16
-    Top = 62
+    Top = 78
     Width = 113
     Height = 17
     Caption = 'Unknown'
     TabOrder = 2
+  end
+  object rdAttracsOffice: TRadioButton
+    Left = 16
+    Top = 36
+    Width = 113
+    Height = 17
+    Caption = 'Attracs office'
+    TabOrder = 3
   end
   object TrayIcon: TTrayIcon
     Animate = True
@@ -643,12 +651,12 @@ object WorkPlaceForm: TWorkPlaceForm
       000000000000000000000000000000000000000000000000000000000000}
     OnClick = TrayIconClick
     OnDblClick = TrayIconClick
-    Left = 88
+    Left = 120
     Top = 24
   end
   object ApplicationEvents: TApplicationEvents
     OnMinimize = ApplicationEventsMinimize
-    Left = 136
+    Left = 160
     Top = 24
   end
 end
